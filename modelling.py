@@ -28,10 +28,10 @@ tfidf1 = TfidfVectorizer(stop_words=ENGLISH_STOP_WORDS,lowercase=True,ngram_rang
 tfidf2 = TfidfVectorizer(stop_words=ENGLISH_STOP_WORDS,lowercase=True,ngram_range=(1,3),max_df=0.9, min_df=0.1)
 
 X_train.append(pd.DataFrame(tfidf1.fit_transform(X_train['text'].values.astype('U')).toarray().tolist()))
-X_train.append(pd.DataFrame(tfidf1.fit_transform(X_train['title'].values.astype('U')).toarray().tolist()))
+X_train.append(pd.DataFrame(tfidf2.fit_transform(X_train['title'].values.astype('U')).toarray().tolist()))
 
-X_test.append(pd.DataFrame(tfidf1.fit_transform(X_test['text'].values.astype('U')).toarray().tolist()))
-X_test.append(pd.DataFrame(tfidf1.fit_transform(X_test['title'].values.astype('U')).toarray().tolist()))
+X_test.append(pd.DataFrame(tfidf1.transform(X_test['text'].values.astype('U')).toarray().tolist()))
+X_test.append(pd.DataFrame(tfidf2.transform(X_test['title'].values.astype('U')).toarray().tolist()))
 
 X_train.drop(['text','title'],inplace=True,axis=1)
 
